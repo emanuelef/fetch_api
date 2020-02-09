@@ -32,7 +32,7 @@ iex -S mix
 Test get
 ```elixir
 Myclient.Client.get("https://api.github.com")
-Myclient.Client.decode(~s({"name":"Steve Irwin","nationality":"Australian"}))
+Myclient.Client.decode(~s({"name":"Ema","nationality":"Italian"}))
 ```
 
 ```elixir
