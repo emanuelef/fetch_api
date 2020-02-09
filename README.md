@@ -20,11 +20,17 @@ and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/fetch_api](https://hexdocs.pm/fetch_api).
 
 Get dependencies
+```
 mix deps.get
+```
 
 Run iex with all dependencies in mix.exs
+```
 iex -S mix
+```
 
 Test get
+```elixir
 Myclient.Client.get("https://api.github.com")
 Myclient.Client.decode(~s({"name":"Steve Irwin","nationality":"Australian"}))
+```
