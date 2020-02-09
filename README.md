@@ -34,3 +34,7 @@ Test get
 Myclient.Client.get("https://api.github.com")
 Myclient.Client.decode(~s({"name":"Steve Irwin","nationality":"Australian"}))
 ```
+
+```elixir
+Myclient.Client.get("https://global.adsbexchange.com/VirtualRadar/AircraftList.json?lat=51.47024&lng=-0.462885&fDstL=0&fDstU=16", ["Referer": "https://global.adsbexchange.com/VirtualRadar/desktop.html"])
+```
