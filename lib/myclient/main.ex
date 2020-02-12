@@ -3,6 +3,7 @@ defmodule Myclient.Main do
 
   @adbs_url "https://global.adsbexchange.com/VirtualRadar/AircraftList.json?lat=51.47024&lng=-0.462885&fDstL=0&fDstU=16"
   @headers [Referer: "https://global.adsbexchange.com/VirtualRadar/desktop.html"]
+  @polling_time 6000
 
   def start do
     {:ok, pid} = Stack.start_link()
@@ -27,11 +28,12 @@ defmodule Myclient.Main do
     case Myclient.Client.get(@adbs_url, @headers) do
       {200, body} -> convert_to_map(body, pid)
       {:error, :timeout} -> Shell.info("Timeout!!!")
+      {:error, _} -> Shell.info("Error Fetching")
     end
 
     Shell.info("Size: #{Stack.size(pid)}")
 
-    Process.sleep(5000)
+    Process.sleep(@polling_time)
     start_fetching(pid)
   end
 end
