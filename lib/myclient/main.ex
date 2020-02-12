@@ -10,7 +10,13 @@ defmodule Myclient.Main do
   end
 
   defp convert_to_map(json_text, pid) do
-    Myclient.Client.decode(json_text)
+    response_map = Myclient.Client.decode(json_text)
+    flights = response_map["acList"]
+    total = Enum.count(flights)
+    Shell.info("Total planes: #{total}")
+
+    #Enum.map(list_with_maps, & &1["Icao"])
+    Enum.each(flights, & IO.puts &1["Icao"])
     Stack.push(pid, :foo)
   end
 
@@ -20,6 +26,7 @@ defmodule Myclient.Main do
 
     case Myclient.Client.get(@adbs_url, @headers) do
       {200, body} -> convert_to_map(body, pid)
+      {:error, :timeout} -> Shell.info("Timeout!!!")
     end
 
     Shell.info("Size: #{Stack.size(pid)}")
